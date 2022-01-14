@@ -7,7 +7,6 @@ type Tournament
     rules: [
       { allow: owner, operations: [create, read] }
       # TODO creator of tournament can update/delete tournament?
-      { allow: public, operations: [read] }
     ]
   ) {
   id: ID!
@@ -28,7 +27,7 @@ type Player
   @auth(
     rules: [
       # TODO owner can edit their profile?
-      { allow: public, operations: [read] }
+      { allow: owner, operations: [read] }
     ]
   ) {
   id: ID!
@@ -47,14 +46,7 @@ type Player
   friends: [Player] @hasMany
 }
 
-type Game
-  @model
-  @auth(
-    rules: [
-      { allow: owner, operations: [create, read] }
-      { allow: public, operations: [read] }
-    ]
-  ) {
+type Game @model @auth(rules: [{ allow: owner, operations: [create, read] }]) {
   id: ID!
   name: String
   tournaments: [Tournament] @hasMany
@@ -63,24 +55,12 @@ type Game
 
 type GameAccount
   @model
-  @auth(
-    rules: [
-      { allow: owner, operations: [create, read] }
-      { allow: public, operations: [read] }
-    ]
-  ) {
+  @auth(rules: [{ allow: owner, operations: [create, read] }]) {
   tag: String
   platform: String
 }
 
-type Team
-  @model
-  @auth(
-    rules: [
-      { allow: owner, operations: [create, read] }
-      { allow: public, operations: [read] }
-    ]
-  ) {
+type Team @model @auth(rules: [{ allow: owner, operations: [create, read] }]) {
   id: ID!
   players: [Player] @manyToMany(relationName: "TeamMember")
 }

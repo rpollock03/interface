@@ -1,2 +1,0 @@
-schema: ./amplify/backend/api/premiere/schema.graphql
-documents: ./src/components/**/*.js

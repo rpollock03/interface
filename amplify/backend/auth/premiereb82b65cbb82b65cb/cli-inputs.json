@@ -42,7 +42,7 @@
     "sharedId": "b82b65cb",
     "resourceName": "premiereb82b65cbb82b65cb",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "manual",
+    "useDefault": "default",
     "usernameAttributes": [
       "email"
     ],
@@ -73,7 +73,6 @@
     "parentStack": {
       "Ref": "AWS::StackId"
     },
-    "authProviders": [],
-    "thirdPartyAuth": false
+    "authProviders": []
   }
 }
