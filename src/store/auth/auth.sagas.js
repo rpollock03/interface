@@ -4,6 +4,7 @@ import AWS from 'aws-sdk'
 
 import * as notifications from 'lib/notifications'
 import * as Actions from './auth.actions'
+import { getTempCredentials } from './auth.selectors'
 
 AWS.config.update({ region: 'eu-west-2' })
 
@@ -32,7 +33,7 @@ export function* signInSaga({ payload }) {
     yield put(Actions.signInSuccess({ result: res }))
     yield delay(1000)
   } catch (e) {
-    console.log('signInSaga', e)
+    console.log('signin err', e)
     let result = payload
     if (e.code !== 'UserNotConfirmedException') result = null
     yield put(
@@ -67,15 +68,15 @@ export function* signUpSaga({ payload }) {
       }
     }
     const res = yield Auth.signUp(input)
-    console.log(res)
     yield put(
       Actions.signUpSuccess({
         result: {
-          username: payload.username,
+          username: payload.email,
           cognitoId: res.userSub
         }
       })
     )
+    const tempCredentials = yield select(getTempCredentials)
   } catch (e) {
     console.log('signUpSaga', e)
     yield put(Actions.signUpFail({ notification: notifications.get(e.code) }))
@@ -84,9 +85,16 @@ export function* signUpSaga({ payload }) {
 
 export function* confirmSignUpSaga({ payload }) {
   try {
-    const res = yield Auth.confirmSignUp(payload.username, payload.code)
+    const user = yield select(getTempCredentials)
+    console.log('tempCreds', user)
+    // TODO get email to temp credentials and use it to signup
+    // should then work
+    const res = yield Auth.confirmSignUp(
+      user.username,
+      payload.code
+    )
     if (res === 'SUCCESS') {
-      const user = yield select(getTempCredentials)
+      // TODO get the user as in tipmi app here
       const signInRes = yield Auth.signIn({
         username: user.username.toLowerCase(),
         password: user.password
@@ -97,18 +105,6 @@ export function* confirmSignUpSaga({ payload }) {
         })
       )
       yield put(Actions.signInSuccess({ result: signInRes }))
-      // read attributes from cognito
-      const attributes = yield select(getUserAttributes)
-      const profileParams = {
-        ...payload,
-        cognitoId: attributes.sub,
-        accountType: attributes['custom:account_type'],
-        email: attributes.email,
-        firstName: attributes.given_name,
-        lastName: attributes.family_name,
-        businessCode: attributes['custom:business_code']
-      }
-      yield put(ProfileActions.createProfile(profileParams))
     }
   } catch (e) {
     console.log('confirmSignUpSaga', e)
@@ -189,20 +185,6 @@ export function* resendSignUpCodeSaga({ payload }) {
   }
 }
 
-export function* updateUserAttributesSaga({ payload }) {
-  try {
-    const user = yield Auth.currentAuthenticatedUser()
-    yield put(ProfileActions.updateProfile({ id: user.username, ...payload }))
-  } catch (e) {
-    console.log('updateUserAttributesSaga', { e })
-    yield put(
-      Actions.updateUserAttributesFail({
-        notification: notifications.get(e.code)
-      })
-    )
-  }
-}
-
 export function* saga() {
   yield takeLatest(Actions.types.SIGN_IN_PERSIST, signInPersistSaga)
   yield takeLatest(Actions.types.SIGN_IN, signInSaga)
@@ -213,8 +195,4 @@ export function* saga() {
   yield takeLatest(Actions.types.FORGOT_PASSWORD, forgotPasswordSaga)
   yield takeLatest(Actions.types.RESET_PASSWORD, resetPasswordSaga)
   yield takeLatest(Actions.types.RESEND_SIGN_UP_CODE, resendSignUpCodeSaga)
-  yield takeLatest(
-    Actions.types.UPDATE_USER_ATTRIBUTES,
-    updateUserAttributesSaga
-  )
 }
