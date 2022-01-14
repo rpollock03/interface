@@ -1,23 +1,21 @@
 import { assert } from 'chai'
-import { signInSaga } from '../src/store/auth/auth.sagas'
+import { Amplify, Auth } from 'aws-amplify'
+import config from 'aws-exports'
+import AWS from 'aws-sdk'
+
+Amplify.configure(config)
+
+AWS.config.update({ region: 'eu-west-2' })
+
+const workingCredentials = {
+  username: 'oliwier.ostro@gmail.com',
+  password: 'Szafagra123@'
+}
 
 describe('sign in works', () => {
-  it('sign in is successful with correct credentials', () => {
-    const workingCredentials = {
-      username: 'oliwier.ostro@gmail.com',
-      password: 'Szafagra123@'
-    }
-    const gen = signInSaga({ payload: workingCredentials })
-    console.log(gen.next().value)
-  })
-
-  it('sign in unsuccessful with incorrect credentials', () => {
-    const invalidCredentials = {
-      username: 'asdfasdf',
-      password: 'asdfasdf'
-    }
-    const gen = signInSaga({ payload: invalidCredentials })
-    console.log(gen.next().value)
+  it('sign in is successful with correct credentials', async () => {
+    const res = await Auth.signIn(workingCredentials)
+    console.log(res)
   })
 })
 
