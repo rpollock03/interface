@@ -11,5 +11,12 @@ export type AmplifyDependentResourcesAttributes = {
             "CreatedSNSRole": "string",
             "FacebookWebClient": "string"
         }
+    },
+    "api": {
+        "premiere": {
+            "GraphQLAPIKeyOutput": "string",
+            "GraphQLAPIIdOutput": "string",
+            "GraphQLAPIEndpointOutput": "string"
+        }
     }
 }
