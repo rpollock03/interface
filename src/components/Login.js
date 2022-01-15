@@ -8,11 +8,13 @@ import { Dots } from "react-activity"
 import { connect } from "react-redux"
 import { signIn } from "store/auth/auth.actions"
 import { getAccountData, getIsLoading } from "store/auth/auth.selectors"
+import router from "next/router"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 
 const mapStateToProps = state => ({
-  isLoading: getIsLoading(state)
+  isLoading: getIsLoading(state),
+  accountData: getAccountData(state)
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -35,7 +37,7 @@ const SignupIfNotGotAnAccount = styled.div`
   justify-content: center;
 `
 
-function Login({ isLoading, onSubmit }) {
+function Login({ isLoading, onSubmit, accountData }) {
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -43,8 +45,7 @@ function Login({ isLoading, onSubmit }) {
     },
 
     onSubmit: values => {
-      console.log(values)
-      console.log(formik.errors)
+      onSubmit
     }
   })
 

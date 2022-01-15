@@ -9,7 +9,6 @@ import History from "components/History"
 import Link from "next/link"
 import { AddMember } from "components/TeamEdit"
 import { useRouter } from "next/router"
-import { useFriendInvites, zip } from "hooks"
 
 const ProfilePanel = styled(Row)``
 

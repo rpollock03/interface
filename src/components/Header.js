@@ -8,6 +8,17 @@ import Dropdown, { DropdownText } from "components/Dropdown"
 import { Button, SignupButton } from "components/Buttons"
 import LogoHeader from "components/LogoHeader"
 import Router from "next/router"
+import { connect } from "react-redux"
+import { getAccountData } from "store/auth/auth.selectors"
+import { signOut } from "store/auth/auth.actions"
+
+const mapStateToProps = state => ({
+  accountData: getAccountData(state)
+})
+
+const mapDispatchToProps = dispatch => ({
+  onSignOut: values => dispatch(signOut(values))
+})
 
 const Header = styled(Row)`
   justify-content: space-between;
@@ -155,7 +166,7 @@ function Navigator({ isAuthenticated, currentUser }) {
   )
 }
 
-export default function _Header({ home }) {
+function _Header({ home, accountData, onSignOut }) {
   const [navigatorOpen, setNavigatorOpen] = useState(false)
   const ref = useRef()
   const dropdownRef = useRef()
@@ -235,7 +246,7 @@ export default function _Header({ home }) {
         </Link>
       </LinksBit>
       <SignupBit>
-        {!isAuthenticated ? (
+        {!accountData ? (
           <>
             <AvatarPlaceholder />
             <Link href={"/login"}>
@@ -252,7 +263,7 @@ export default function _Header({ home }) {
             >
               {/*<Avatar src={currentUserAvatar} /> */}
             </div>
-            <LogoutButton>log out</LogoutButton>
+            <LogoutButton onClick={onSignOut}>log out</LogoutButton>
           </>
         )}
       </SignupBit>
