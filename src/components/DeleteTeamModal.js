@@ -1,7 +1,7 @@
-import Modal from "react-modal"
-import styled from "styled-components"
-import { Button as BaseButton } from "components/Buttons"
-import { Center, Column, Row } from "./common"
+import Modal from 'react-modal'
+import styled from 'styled-components'
+import { Button as BaseButton } from 'components/Buttons'
+import { Center, Column, Row } from './common'
 
 const Button = styled(BaseButton)`
   margin-bottom: 49px;
@@ -40,14 +40,14 @@ const SpaceBetween = styled(Row)`
 export default function DeleteTeamModal({ isOpen, setOpen }) {
   const style = {
     content: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
       width: 674,
       height: 205,
-      margin: "auto",
+      margin: 'auto',
       borderRadius: 15,
-      boxShadow: "0px 8px 50px 2px #00000040"
+      boxShadow: '0px 8px 50px 2px #00000040'
     }
   }
   return (

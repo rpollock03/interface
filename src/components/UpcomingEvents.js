@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { Column, Row, Container, Circle } from "components/common"
+import { Column, Row, Circle } from "components/common"
 import { Heading, Subtext } from "components/Forms"
 import Image from "next/image"
 import { ArrowButton } from "components/Buttons"
@@ -133,8 +133,8 @@ export default function _UpcomingEvents() {
       </EventsSubtext>
       <PlayerWrapper>
         <ReactPlayer
-          url={"https://www.twitch.tv/izakooo"}
-          playing={true}
+          url="https://www.twitch.tv/izakooo"
+          playing
           width="126%"
           height={788}
           style={{
@@ -147,11 +147,11 @@ export default function _UpcomingEvents() {
       <WatchedTournament>
         <div style={{ marginLeft: 40, marginRight: 38 }}>
           <Image
-            src={"/csgo.svg"}
+            src="/csgo.svg"
             width={167}
             height={260}
             layout="fixed"
-            alt={"watch tournament"}
+            alt="watch tournament"
           />
         </div>
         <TournamentInfo>
@@ -160,23 +160,18 @@ export default function _UpcomingEvents() {
           <Summary>{tournament.summary}</Summary>
           <Buttons>
             <ArrowButtonContainer>
-              <ArrowButton text={"watch live on twitch.tv"} />
+              <ArrowButton text="watch live on twitch.tv" />
             </ArrowButtonContainer>
             <CirclesRow>
               <ShadowCircle>
-                <Image
-                  src={"/laptop.svg"}
-                  width={24}
-                  height={24}
-                  alt={"laptop"}
-                />
+                <Image src="/laptop.svg" width={24} height={24} alt="laptop" />
               </ShadowCircle>
               <ShadowCircle>
                 <Image
-                  src={"/logo-xbox.svg"}
+                  src="/logo-xbox.svg"
                   width={24}
                   height={24}
-                  alt={"xbox"}
+                  alt="xbox"
                 />
               </ShadowCircle>
             </CirclesRow>

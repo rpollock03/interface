@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react"
-import styled from "styled-components"
-import { Row, Column, GradientText } from "components/common"
-import { ArrowButton } from "components/Buttons"
+import { useEffect, useRef } from 'react'
+import styled from 'styled-components'
+import { Row, Column, GradientText } from 'components/common'
+import { ArrowButton } from 'components/Buttons'
 
 const Container = styled(Row)`
   justify-content: space-between;
@@ -61,7 +61,7 @@ const Caption = styled.div`
 function Video({ src, caption }) {
   const vid = useRef()
 
-  useEffect(function () {
+  useEffect(() => {
     vid.current.play()
   }, [])
 
@@ -71,11 +71,11 @@ function Video({ src, caption }) {
         ref={vid}
         width={584}
         height={373}
-        muted={true}
+        muted
         controls={false}
-        loop={true}
+        loop
       >
-        <source src={src} type={"video/mp4"} />
+        <source src={src} type="video/mp4" />
       </video>
       <Caption>
         <GradientText>{caption}</GradientText>
@@ -88,8 +88,8 @@ export default function WelcomeToPremiere() {
   return (
     <Container>
       <Video
-        src={"https://media.w3.org/2010/05/sintel/trailer.mp4"}
-        caption={"Featured clip - @devonhenry_"}
+        src="https://media.w3.org/2010/05/sintel/trailer.mp4"
+        caption="Featured clip - @devonhenry_"
       />
       <SideColumn>
         <Heading>Welcome to Premiere</Heading>
@@ -99,7 +99,7 @@ export default function WelcomeToPremiere() {
           ...Premiere is a ...Premiere is a ...Premiere is a ...Premiere is a
           ...Premiere is a ...Premiere is a ...
         </Subtext>
-        <ArrowButton text={"meet the team"} />
+        <ArrowButton text="meet the team" />
       </SideColumn>
     </Container>
   )

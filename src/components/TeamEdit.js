@@ -1,7 +1,7 @@
-import styled from "styled-components"
-import { Row, Column } from "./common"
-import { Heading, Input } from "./Forms"
-import Image from "next/image"
+import styled from 'styled-components'
+import Image from 'next/image'
+import { Row, Column } from './common'
+import { Heading, Input } from './Forms'
 
 const EditColumn = styled(Column)`
   width: 541px;
@@ -139,13 +139,13 @@ const RemoveMember = styled.div`
 export default function _TeamEdit() {
   const teammates = [
     {
-      user: "devonhenry_"
+      user: 'devonhenry_'
     },
     {
-      user: "devonhenry_"
+      user: 'devonhenry_'
     },
     {
-      user: "devonhenry_"
+      user: 'devonhenry_'
     }
   ]
 
@@ -154,11 +154,11 @@ export default function _TeamEdit() {
       <EditYourTeam>edit your team</EditYourTeam>
       <Wrapper>
         <SubHeading>Team Name</SubHeading>
-        <InputName placeholder={"Enter your team name"} />
+        <InputName placeholder="Enter your team name" />
       </Wrapper>
       <Wrapper>
         <SubHeading>Team Description</SubHeading>
-        <InputDescription placeholder={"Enter your team description"} />
+        <InputDescription placeholder="Enter your team description" />
       </Wrapper>
       <Wrapper>
         <SubHeading>Team Members</SubHeading>
@@ -170,7 +170,7 @@ export default function _TeamEdit() {
                   src={`/${teammate.user}.svg`}
                   width={90}
                   height={90}
-                  alt={"teammate-image"}
+                  alt="teammate-image"
                 />
                 <RemoveMember />
               </MembersRow>

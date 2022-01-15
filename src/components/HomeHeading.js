@@ -1,7 +1,7 @@
-import styled from "styled-components"
-import { Row, Column } from "components/common"
-import Image from "next/image"
-import { ViewTournamentsButton } from "components/Buttons"
+import styled from 'styled-components'
+import { Row, Column } from 'components/common'
+import Image from 'next/image'
+import { ViewTournamentsButton } from 'components/Buttons'
 
 const Heading = styled.div`
   font-family: Inter;
@@ -43,7 +43,7 @@ export default function HomeHeading() {
         </Subheading>
         <ViewTournamentsButton />
       </SideColumn>
-      <Image src={"/guys.svg"} width={488} height={340} alt={"guys"} />
+      <Image src="/guys.svg" width={488} height={340} alt="guys" />
     </Container>
   )
 }

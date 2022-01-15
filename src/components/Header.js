@@ -259,3 +259,5 @@ export default function _Header({ home }) {
     </Header>
   )
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(_Header)

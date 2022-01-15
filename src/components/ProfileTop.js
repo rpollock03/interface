@@ -1,12 +1,13 @@
+<<<<<<< Updated upstream
 import { useContext, useEffect, useRef } from "react"
+=======
+import { useState } from "react"
+>>>>>>> Stashed changes
 import styled from "styled-components"
 import { Column, Container, Row } from "components/common"
-import Image from "next/image"
-import { useState } from "react"
 import Friends from "components/Friends"
 import Teams from "components/Teams"
 import Home from "components/ProfileHome"
-import History from "components/History"
 import Link from "next/link"
 import AuthenticationContext from "contexts/authentication"
 import { useFriends, useStats, useInviteFriend, useUser } from "hooks"
@@ -127,12 +128,15 @@ export default function ProfileTop() {
   const { userId } = router.query
   const { user, avatar } = useUser(userId)
   const [selected, setSelected] = useState("Home")
+<<<<<<< Updated upstream
   const { currentUser, isAuthenticated, token } = useContext(
     AuthenticationContext
   )
   const friends = useFriends(user)
   const stats = useStats(user)
   const inviteFriend = useInviteFriend()
+=======
+>>>>>>> Stashed changes
 
   return (
     <Column>
@@ -161,13 +165,10 @@ export default function ProfileTop() {
           </ProfilePanel>
           {currentUser &&
             userId &&
-            currentUser.id != userId &&
+            currentUser.id !== userId &&
             isAuthenticated && (
               <ArrowColumn>
-                <div
-                  style={{ cursor: "pointer" }}
-                  onClick={() => inviteFriend(currentUser.id, userId, token)}
-                >
+                <div style={{ cursor: "pointer" }}>
                   <AddMember />
                   <div style={{ marginTop: 10 }}>invite friend</div>
                 </div>
@@ -176,34 +177,34 @@ export default function ProfileTop() {
         </SpaceBetween>
         <ButtonWrapper>
           <ButtonHome
-            style={{ borderBottom: `${selected == "Home" ? 1 : 0}px solid` }}
+            style={{ borderBottom: `${selected === "Home" ? 1 : 0}px solid` }}
             onClick={() => setSelected("Home")}
           >
             home
           </ButtonHome>
           <Button
             style={{
-              borderBottom: `${selected == "History" ? 1 : 0}px solid`
+              borderBottom: `${selected === "History" ? 1 : 0}px solid`
             }}
             onClick={() => setSelected("History")}
           >
             event history
           </Button>
           <Button
-            style={{ borderBottom: `${selected == "Teams" ? 1 : 0}px solid` }}
+            style={{ borderBottom: `${selected === "Teams" ? 1 : 0}px solid` }}
             onClick={() => setSelected("Teams")}
           >
             teams
           </Button>
           <Button
             style={{
-              borderBottom: `${selected == "Friends" ? 1 : 0}px solid`
+              borderBottom: `${selected === "Friends" ? 1 : 0}px solid`
             }}
             onClick={() => setSelected("Friends")}
           >
             friends
           </Button>
-          <Link href={"/events"}>
+          <Link href="/events">
             <a style={{ color: "inherit" }}>
               <ButtonEvents>upcoming events</ButtonEvents>
             </a>
@@ -211,8 +212,8 @@ export default function ProfileTop() {
         </ButtonWrapper>
       </Wrapper>
       {selected == "Teams" && <Teams />}
-      {selected == "Friends" && <Friends friends={friends} />}
-      {selected == "Home" && <Home friends={friends} />}
+      {selected == "Friends" && <Friends friends={null} />}
+      {selected == "Home" && <Home friends={null} />}
     </Column>
   )
 }

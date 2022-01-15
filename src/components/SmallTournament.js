@@ -1,14 +1,14 @@
-import Image from "next/image"
+import Image from 'next/image'
 import {
   Subheading,
   Column,
   Container,
   GradientText,
   Circle
-} from "components/common"
-import { ArrowButton } from "components/Buttons"
-import GradientDropdown from "components/GradientDropdown"
-import styled from "styled-components"
+} from 'components/common'
+import { ArrowButton } from 'components/Buttons'
+import GradientDropdown from 'components/GradientDropdown'
+import styled from 'styled-components'
 
 const Row = styled.div`
   display: flex;
@@ -103,12 +103,12 @@ const ImageContainer = styled.div`
 export default function SmallTournament({ tournament }) {
   return (
     <TournamentContainer>
-      <Row style={{ width: "100%", height: "100%" }}>
+      <Row style={{ width: '100%', height: '100%' }}>
         <ImageContainer>
           <Image
             src={`/${tournament.game}.svg`}
-            alt={"tournament_pic"}
-            layout={"fill"}
+            alt="tournament_pic"
+            layout="fill"
           />
         </ImageContainer>
         <InfoColumn>
@@ -124,37 +124,37 @@ export default function SmallTournament({ tournament }) {
           <InfoText>
             <span style={{ fontWeight: 800 }}>Prize</span>
             <span>
-              {" "}
+              {' '}
               - {tournament.prize} {tournament.prize_currency}
             </span>
           </InfoText>
           <ButtonRow>
             <div style={{ marginTop: 11, fontSize: 15 }}>
-              <ArrowButton text={"enter now"} />
+              <ArrowButton text="enter now" />
             </div>
             <Row>
               <ShadowCircle>
                 <Image
-                  src={"/xplay.svg"}
+                  src="/xplay.svg"
                   width={24}
                   height={24}
-                  alt={"xplay"}
+                  alt="xplay"
                 />
               </ShadowCircle>
               <ShadowCircle>
                 <Image
-                  src={"/laptop.svg"}
+                  src="/laptop.svg"
                   width={24}
                   height={24}
-                  alt={"laptop"}
+                  alt="laptop"
                 />
               </ShadowCircle>
               <ShadowCircle>
                 <Image
-                  src={"/logo-xbox.svg"}
+                  src="/logo-xbox.svg"
                   width={24}
                   height={24}
-                  alt={"xbox"}
+                  alt="xbox"
                 />
               </ShadowCircle>
             </Row>

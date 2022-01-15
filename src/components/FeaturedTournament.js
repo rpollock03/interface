@@ -1,14 +1,14 @@
-import Image from "next/image"
+import Image from 'next/image'
 import {
   Subheading,
   Column,
   Container,
   GradientText,
   Circle
-} from "components/common"
-import { ArrowButton } from "components/Buttons"
-import GradientDropdown from "components/GradientDropdown"
-import styled from "styled-components"
+} from 'components/common'
+import { ArrowButton } from 'components/Buttons'
+import GradientDropdown from 'components/GradientDropdown'
+import styled from 'styled-components'
 
 const Row = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ const TournamentContainer = styled(Container)`
   &:hover {
     border: 1px solid ${props => props.theme.colors.ruby};
   }
-  border-radius: ${props => (props.roundBorders ? "10px" : "0")};
+  border-radius: ${props => (props.roundBorders ? '10px' : '0')};
   overflow: hidden;
 `
 
@@ -85,12 +85,12 @@ const ImageContainer = styled.div`
 export default function FeaturedTournament({ tournament, roundBorders }) {
   return (
     <TournamentContainer roundBorders={roundBorders}>
-      <Row style={{ width: "100%", height: "100%" }}>
+      <Row style={{ width: '100%', height: '100%' }}>
         <ImageContainer>
           <Image
             src={`/${tournament.game}.svg`}
-            alt={"tournament_pic"}
-            layout={"fill"}
+            alt="tournament_pic"
+            layout="fill"
           />
         </ImageContainer>
         <InfoColumn>

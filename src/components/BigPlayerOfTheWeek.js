@@ -1,7 +1,7 @@
-import Image from "next/image"
-import styled from "styled-components"
-import { LeaderboardTitle, Row, Column, GradientText } from "components/common"
-import { useRouter } from "next/router"
+import Image from 'next/image'
+import styled from 'styled-components'
+import { LeaderboardTitle, Row, Column, GradientText } from 'components/common'
+import { useRouter } from 'next/router'
 
 const Container = styled.div`
   margin-bottom: 150px;
@@ -69,7 +69,7 @@ export default function BigPlayerOfTheWeek({ user, avatar }) {
       <LeaderboardTitle>Player of the week</LeaderboardTitle>
       <PlayerRow>
         <div
-          style={{ marginRight: 60, cursor: "pointer" }}
+          style={{ marginRight: 60, cursor: 'pointer' }}
           onClick={
             user?.id ? () => router.push(`/profile/${user.id}`) : () => null
           }
@@ -82,15 +82,15 @@ export default function BigPlayerOfTheWeek({ user, avatar }) {
           <StatsRow>
             <StatColumn>
               <StatHeading>rank</StatHeading>
-              <Stat>{user?.rank ?? "-"}</Stat>
+              <Stat>{user?.rank ?? '-'}</Stat>
             </StatColumn>
             <StatColumn>
               <StatHeading>weekly wins</StatHeading>
-              <Stat>{user?.weeklyWins ?? "-"}</Stat>
+              <Stat>{user?.weeklyWins ?? '-'}</Stat>
             </StatColumn>
             <StatColumn>
               <StatHeading>$prem earned</StatHeading>
-              <Stat>{user?.premEarned ?? "-"}</Stat>
+              <Stat>{user?.premEarned ?? '-'}</Stat>
             </StatColumn>
           </StatsRow>
         </Column>

@@ -1,16 +1,16 @@
-import { useState } from "react"
-import styled from "styled-components"
+import { useState } from 'react'
+import styled from 'styled-components'
 import {
   Column,
   Container,
   Row,
   GradientText,
   Circle
-} from "components/common"
-import Image from "next/image"
-import { ArrowButton } from "components/Buttons"
-import DeleteTeamModal from "components/DeleteTeamModal"
-import Link from "next/link"
+} from 'components/common'
+import Image from 'next/image'
+import { ArrowButton } from 'components/Buttons'
+import DeleteTeamModal from 'components/DeleteTeamModal'
+import Link from 'next/link'
 
 const Button = styled.div``
 
@@ -132,31 +132,31 @@ export default function Teams() {
 
   const teammates = [
     {
-      user: "devonhenry_"
+      user: 'devonhenry_'
     },
     {
-      user: "devonhenry_"
+      user: 'devonhenry_'
     },
     {
-      user: "devonhenry_"
+      user: 'devonhenry_'
     }
   ]
 
   const teams = [
     {
-      name: "[INSERT TEAM NAME]",
+      name: '[INSERT TEAM NAME]',
       wins: 123,
       losses: 4,
       prem: 1234567
     },
     {
-      name: "[INSERT TEAM NAME]",
+      name: '[INSERT TEAM NAME]',
       wins: 123,
       losses: 4,
       prem: 1234567
     },
     {
-      name: "[INSERT TEAM NAME]",
+      name: '[INSERT TEAM NAME]',
       wins: 123,
       losses: 4,
       prem: 1234567
@@ -178,7 +178,7 @@ export default function Teams() {
                         src={`/${teammate.user}.svg`}
                         width={89.74}
                         height={89.74}
-                        alt={"teammate-image"}
+                        alt="teammate-image"
                       />
                     </div>
                   ))}
@@ -186,18 +186,18 @@ export default function Teams() {
               <IconsRow>
                 <Laptop>
                   <Image
-                    src={"/laptop.svg"}
+                    src="/laptop.svg"
                     width={19.54}
                     height={19.54}
-                    alt={"laptop-image"}
+                    alt="laptop-image"
                   />
                 </Laptop>
                 <Xbox>
                   <Image
-                    src={"/xbox.svg"}
+                    src="/xbox.svg"
                     width={19.54}
                     height={19.54}
-                    alt={"laptop-image"}
+                    alt="laptop-image"
                   />
                 </Xbox>
               </IconsRow>
@@ -218,18 +218,18 @@ export default function Teams() {
               </TeamPrem>
             </TeamInfo>
             <GradientTextRow>
-              <Link href={"edit-team"}>
+              <Link href="edit-team">
                 <a>
                   <ArrowButtonContainer>
                     <Button>
-                      <ArrowButton text={"Edit Team"} />
+                      <ArrowButton text="Edit Team" />
                     </Button>
                   </ArrowButtonContainer>
                 </a>
               </Link>
               <ArrowButtonContainer>
                 <Button onClick={() => setOpen(true)}>
-                  <ArrowButton text={"Delete Team"} />
+                  <ArrowButton text="Delete Team" />
                 </Button>
               </ArrowButtonContainer>
             </GradientTextRow>

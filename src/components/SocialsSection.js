@@ -5,9 +5,9 @@ import {
   Telegram,
   Youtube,
   SocialsDivider
-} from "components/Socials"
-import { Row as _Row, Column as _Column } from "components/common"
-import styled from "styled-components"
+} from 'components/Socials'
+import { Row as _Row, Column as _Column } from 'components/common'
+import styled from 'styled-components'
 
 const Row = styled(_Row)`
   height: 125px;
@@ -71,7 +71,7 @@ export default function SocialsSection() {
       </_Row>
       <SocialsDividerContainer>
         <SocialsDivider
-          style={{ position: "relative", alignSelf: "center" }}
+          style={{ position: 'relative', alignSelf: 'center' }}
         />
       </SocialsDividerContainer>
       <SocialsRow>

@@ -1,6 +1,6 @@
-import Image from "next/image"
-import styled from "styled-components"
-import { Center } from "components/common"
+import Image from 'next/image'
+import styled from 'styled-components'
+import { Center } from 'components/common'
 
 const Container = styled(Center)`
   flex-direction: column;
@@ -18,7 +18,7 @@ const Text = styled.div`
 export default function ViewAll() {
   return (
     <Container>
-      <Image src={"/arrow_right.svg"} width={67} height={67} alt={"arrow"} />
+      <Image src="/arrow_right.svg" width={67} height={67} alt="arrow" />
       <Text style={{ marginTop: 8 }}>VIEW ALL</Text>
     </Container>
   )
