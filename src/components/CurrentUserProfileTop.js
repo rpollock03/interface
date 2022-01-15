@@ -1,14 +1,14 @@
-import { useEffect, useRef, useState } from 'react'
-import styled from 'styled-components'
-import { Column, Container, Row } from 'components/common'
-import Image from 'next/image'
-import Friends from 'components/Friends'
-import Teams from 'components/Teams'
-import Home from 'components/ProfileHome'
-import History from 'components/History'
-import Link from 'next/link'
-import { AddMember } from 'components/TeamEdit'
-import { useRouter } from 'next/router'
+import { useEffect, useRef, useState } from "react"
+import styled from "styled-components"
+import { Column, Container, Row } from "components/common"
+import Image from "next/image"
+import Friends from "components/Friends"
+import Teams from "components/Teams"
+import Home from "components/ProfileHome"
+import History from "components/History"
+import Link from "next/link"
+import { AddMember } from "components/TeamEdit"
+import { useRouter } from "next/router"
 
 const ProfilePanel = styled(Row)``
 
@@ -80,7 +80,6 @@ const Button = styled.div`
   font-weight: 500;
   line-height: 40px;
   letter-spacing: 0.1em;
-  border-bottom: 0px solid;
   border-image-source: linear-gradient(
     266.89deg,
     #982649 -18.13%,
@@ -112,34 +111,29 @@ const Avatar = styled.img`
 `
 
 export default function ProfileTop() {
-  const [selected, setSelected] = useState('Home')
-  const { currentUser, isAuthenticated, currentUserAvatar, token } =
-    useContext(AuthenticationContext)
-  const friends = useFriends(currentUser)
-  const stats = useStats(currentUser)
-  const { invites, avatars, error } = useFriendInvites(currentUser?.id, token)
+  const [selected, setSelected] = useState("Home")
 
   return (
     <Column>
       <Wrapper>
         <SpaceBetween>
           <ProfilePanel>
-            {currentUserAvatar && <Avatar src={currentUserAvatar} />}
+            <Avatar src={null} />
             <ProfileInfo>
-              <Name>{currentUser?.username}</Name>
-              <Team>{currentUser?.team}</Team>
+              <Name />
+              <Team />
               <ProfileStats>
                 <GreyTextColumn>
                   <GreyText>rank</GreyText>
-                  <Numbers>{stats?.rank ?? '-'}</Numbers>
+                  <Numbers />
                 </GreyTextColumn>
                 <GreyTextColumn>
                   <GreyText>weekly wins</GreyText>
-                  <Numbers>{stats?.weeklyWins ?? 0}</Numbers>
+                  <Numbers />
                 </GreyTextColumn>
                 <GreyTextColumn>
                   <GreyText>Friends</GreyText>
-                  <Numbers>{friends.length}</Numbers>
+                  <Numbers />
                 </GreyTextColumn>
               </ProfileStats>
             </ProfileInfo>
@@ -147,45 +141,45 @@ export default function ProfileTop() {
         </SpaceBetween>
         <ButtonWrapper>
           <ButtonHome
-            style={{ borderBottom: `${selected === 'Home' ? 1 : 0}px solid` }}
-            onClick={() => setSelected('Home')}
+            style={{ borderBottom: `${selected === "Home" ? 1 : 0}px solid` }}
+            onClick={() => setSelected("Home")}
           >
             home
           </ButtonHome>
           <Button
             style={{
-              borderBottom: `${selected === 'History' ? 1 : 0}px solid`
+              borderBottom: `${selected === "History" ? 1 : 0}px solid`
             }}
-            onClick={() => setSelected('History')}
+            onClick={() => setSelected("History")}
           >
             event history
           </Button>
           <Button
-            style={{ borderBottom: `${selected === 'Teams' ? 1 : 0}px solid` }}
-            onClick={() => setSelected('Teams')}
+            style={{ borderBottom: `${selected === "Teams" ? 1 : 0}px solid` }}
+            onClick={() => setSelected("Teams")}
           >
             teams
           </Button>
           <Button
             style={{
-              borderBottom: `${selected === 'Friends' ? 1 : 0}px solid`
+              borderBottom: `${selected === "Friends" ? 1 : 0}px solid`
             }}
-            onClick={() => setSelected('Friends')}
+            onClick={() => setSelected("Friends")}
           >
             friends
           </Button>
           <Link href="/events">
-            <a style={{ color: 'inherit' }}>
+            <a style={{ color: "inherit" }}>
               <ButtonEvents>upcoming events</ButtonEvents>
             </a>
           </Link>
         </ButtonWrapper>
       </Wrapper>
-      {selected == 'Teams' && <Teams />}
-      {selected == 'Friends' && (
-        <Friends friends={friends} invites={invites} avatars={avatars} />
+      {selected == "Teams" && <Teams />}
+      {selected == "Friends" && (
+        <Friends friends={null} invites={null} avatars={null} />
       )}
-      {selected == 'Home' && <Home />}
+      {selected == "Home" && <Home />}
     </Column>
   )
 }

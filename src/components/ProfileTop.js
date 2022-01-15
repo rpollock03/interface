@@ -1,13 +1,13 @@
-import { useState, useEffect, useRef } from 'react'
-import styled from 'styled-components'
-import { Column, Container, Row } from 'components/common'
-import Friends from 'components/Friends'
-import Teams from 'components/Teams'
-import Home from 'components/ProfileHome'
-import History from 'components/History'
-import Link from 'next/link'
-import { AddMember } from 'components/TeamEdit'
-import { useRouter } from 'next/router'
+import { useState, useEffect, useRef } from "react"
+import styled from "styled-components"
+import { Column, Container, Row } from "components/common"
+import Friends from "components/Friends"
+import Teams from "components/Teams"
+import Home from "components/ProfileHome"
+import History from "components/History"
+import Link from "next/link"
+import { AddMember } from "components/TeamEdit"
+import { useRouter } from "next/router"
 
 const ProfilePanel = styled(Row)``
 
@@ -120,73 +120,66 @@ const Avatar = styled.img`
 
 export default function ProfileTop() {
   const router = useRouter()
-  const { userId } = router.query
-  const { user, avatar } = useUser(userId)
-  const [selected, setSelected] = useState('Home')
+  const [selected, setSelected] = useState("Home")
 
   return (
     <Column>
       <Wrapper>
         <SpaceBetween>
           <ProfilePanel>
-            {avatar && <Avatar src={avatar} />}
+            <Avatar src={null} />
             <ProfileInfo>
-              <Name>{user?.username}</Name>
-              <Team>{user?.team}</Team>
+              <Name />
+              <Team />
               <ProfileStats>
                 <GreyTextColumn>
                   <GreyText>rank</GreyText>
-                  <Numbers>{stats?.rank ?? '-'}</Numbers>
+                  <Numbers />
                 </GreyTextColumn>
                 <GreyTextColumn>
                   <GreyText>weekly wins</GreyText>
-                  <Numbers>{stats?.weeklyWins ?? 0}</Numbers>
+                  <Numbers />
                 </GreyTextColumn>
                 <GreyTextColumn>
                   <GreyText>Friends</GreyText>
-                  <Numbers>{friends.length}</Numbers>
+                  <Numbers />
                 </GreyTextColumn>
               </ProfileStats>
             </ProfileInfo>
           </ProfilePanel>
-          {currentUser &&
-            userId &&
-            currentUser.id !== userId &&
-            isAuthenticated && (
-              <ArrowColumn>
-                <div style={{ cursor: 'pointer' }}>
-                  <AddMember />
-                  <div style={{ marginTop: 10 }}>invite friend</div>
-                </div>
-              </ArrowColumn>
-            )}
+          <ArrowColumn>
+            <div style={{ cursor: "pointer" }}>
+              <AddMember />
+              <div style={{ marginTop: 10 }}>invite friend</div>
+            </div>
+          </ArrowColumn>
         </SpaceBetween>
         <ButtonWrapper>
           <ButtonHome
-            style={{ borderBottom: `${selected === 'Home' ? 1 : 0}px solid` }}
-            onClick={() => setSelected('Home')}
+            style={{ borderBottom: `${selected === "Home" ? 1 : 0}px solid` }}
+            onClick={() => setSelected("Home")}
           >
             home
           </ButtonHome>
           <Button
             style={{
-              borderBottom: `${selected === 'History' ? 1 : 0}px solid`
+              borderBottom: `${selected === "History" ? 1 : 0}px solid`
             }}
-            onClick={() => setSelected('History')}
+            onClick={() => setSelected("History")}
           >
             event history
           </Button>
           <Button
-            style={{ borderBottom: `${selected === 'Teams' ? 1 : 0}px solid` }}
-            onClick={() => setSelected('Teams')}
+            style={{ borderBottom: `${selected === "Teams" ? 1 : 0}px solid` }}
+            onClick={() => setSelected("Teams")}
           >
             teams
           </Button>
           <Button
             style={{
-              borderBottom: `${selected === 'Friends' ? 1 : 0}px solid`
+              borderBottom: `${selected === "Friends" ? 1 : 0}px solid`
             }}
-            onClick={() => setSelected('Friends')}
+            onClick={() => setSelected("Friends")}
           >
             friends
           </Button>
@@ -195,9 +188,10 @@ export default function ProfileTop() {
           </Link>
         </ButtonWrapper>
       </Wrapper>
-      {selected === 'Teams' && <Teams />}
-      {selected === 'Friends' && <Friends friends={null} />}
-      {selected === 'Home' && <Home friends={null} />}
+      {selected === "Teams" && <Teams />}
+      {selected === "History" && <History />}
+      {selected === "Friends" && <Friends friends={null} />}
+      {selected === "Home" && <Home friends={null} />}
     </Column>
   )
 }

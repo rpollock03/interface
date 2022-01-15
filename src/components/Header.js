@@ -11,9 +11,6 @@ import Router from "next/router"
 import { connect } from "react-redux"
 import { getAccountData } from "store/auth/auth.selectors"
 import { signOut } from "store/auth/auth.actions"
-import { signOut } from "store/auth/auth.actions"
-import { getAccountData } from "store/auth/auth.selectors"
-import { connect } from "react-redux"
 
 const mapStateToProps = state => ({
   accountData: getAccountData(state)
@@ -128,27 +125,27 @@ function Navigator({ accountData, onSignOut }) {
   return (
     <NavigatorContainer>
       <LinksContainer>
-        <Link href={"/games"}>
+        <Link href="/games">
           <a>
             <DropdownText>GAMES</DropdownText>
           </a>
         </Link>
-        <Link href={"/tournaments"}>
+        <Link href="/tournaments">
           <a>
             <DropdownText>TOURNAMENTS</DropdownText>
           </a>
         </Link>
-        <Link href={"/leaderboards"}>
+        <Link href="/leaderboards">
           <a>
             <DropdownText>LEADERBOARDS</DropdownText>
           </a>
         </Link>
-        <Link href={"/support"}>
+        <Link href="/support">
           <a>
             <DropdownText>SUPPORT</DropdownText>
           </a>
         </Link>
-        <Link href={"/events"}>
+        <Link href="/events">
           <a>
             <DropdownText>EVENTS</DropdownText>
           </a>
@@ -156,11 +153,10 @@ function Navigator({ accountData, onSignOut }) {
         {accountData ? (
           <LogoutButton onClick={onSignOut}>log out</LogoutButton>
         ) : (
-          <Link href={"/login"}>
+          <Link href="/login">
             <a>
               <LoginButton>log in</LoginButton>
             </a>
-  try {
           </Link>
         )}
       </LinksContainer>
@@ -173,14 +169,15 @@ function _Header({ home, accountData, onSignOut }) {
   const ref = useRef()
   const dropdownRef = useRef()
 
-  useEffect(function () {
+  useEffect(() => {
     function handleOutsideClick(event) {
       if (
         ref.current &&
         !ref.current.contains(event.target) &&
         !dropdownRef.current.contains(event.target)
-      )
+      ) {
         setNavigatorOpen(false)
+      }
     }
     document.addEventListener("mousedown", handleOutsideClick)
 
@@ -210,10 +207,10 @@ function _Header({ home, accountData, onSignOut }) {
             src={navigatorOpen ? "/navigator_open.svg" : "/navigator.svg"}
             width={24}
             height={24}
-            alt={"navigator"}
+            alt="navigator"
           />
         </LinksDropdown>
-        <Link href={"/"}>
+        <Link href="/">
           <a>
             <LogoHeader />
           </a>
@@ -223,27 +220,27 @@ function _Header({ home, accountData, onSignOut }) {
         <Navigator accountData={accountData} onSignOut={onSignOut} ref={ref} />
       )}
       <LinksBit>
-        <Link href={"/games"}>
+        <Link href="/games">
           <a>
             <DropdownText>GAMES</DropdownText>
           </a>
         </Link>
-        <Link href={"/tournaments"}>
+        <Link href="/tournaments">
           <a>
             <DropdownText>TOURNAMENTS</DropdownText>
           </a>
         </Link>
-        <Link href={"/leaderboards"}>
+        <Link href="/leaderboards">
           <a>
             <DropdownText>LEADERBOARDS</DropdownText>
           </a>
         </Link>
-        <Link href={"/support"}>
+        <Link href="/support">
           <a>
             <DropdownText>SUPPORT</DropdownText>
           </a>
         </Link>
-        <Link href={"/events"}>
+        <Link href="/events">
           <a>
             <DropdownText>EVENTS</DropdownText>
           </a>
@@ -253,7 +250,7 @@ function _Header({ home, accountData, onSignOut }) {
         {!accountData ? (
           <>
             <AvatarPlaceholder />
-            <Link href={"/login"}>
+            <Link href="/login">
               <a>
                 <LoginButton>login</LoginButton>
               </a>
@@ -262,15 +259,15 @@ function _Header({ home, accountData, onSignOut }) {
         ) : (
           <>
             <div
-              onClick={() => Router.push(`/profile`)}
+              onClick={() => Router.push("/profile")}
               style={{ cursor: "pointer", marginTop: 5 }}
             >
-              {/*<Avatar src={currentUserAvatar} /> */}
+              {/* <Avatar src={currentUserAvatar} /> */}
             </div>
             {accountData ? (
               <LogoutButton onClick={onSignOut}>log out</LogoutButton>
             ) : (
-              <Link href={"/login"}>
+              <Link href="/login">
                 <a>
                   <LoginButton>log in</LoginButton>
                 </a>
@@ -283,8 +280,4 @@ function _Header({ home, accountData, onSignOut }) {
   )
 }
 
-<<<<<<< HEAD
-=======
-try {
->>>>>>> email-authentication
 export default connect(mapStateToProps, mapDispatchToProps)(_Header)

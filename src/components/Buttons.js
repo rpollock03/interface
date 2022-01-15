@@ -1,7 +1,7 @@
-import styled from 'styled-components'
-import { GradientText } from 'components/common'
-import Image from 'next/image'
-import Link from 'next/link'
+import styled from "styled-components"
+import { GradientText } from "components/common"
+import Image from "next/image"
+import Link from "next/link"
 
 export const Button = styled.button`
   --gradient: linear-gradient(266.89deg, #982649 -18.13%, #f71735 120.14%);
@@ -66,6 +66,10 @@ export function SignupButton({ text, disabled }) {
 
 export function SignupButtonLarge() {
   return <SignupLarge>sign up</SignupLarge>
+}
+
+export function CreateTournamentButton() {
+  return <SignupLarge>Create</SignupLarge>
 }
 
 export function DashboardButton() {
