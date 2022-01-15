@@ -1,14 +1,13 @@
-import { useState } from "react"
-import styled from "styled-components"
-import { Column, Container, Row } from "components/common"
-import Friends from "components/Friends"
-import Teams from "components/Teams"
-import Home from "components/ProfileHome"
-import Link from "next/link"
-import AuthenticationContext from "contexts/authentication"
-import { useFriends, useStats, useInviteFriend, useUser } from "hooks"
-import { AddMember } from "components/TeamEdit"
-import { useRouter } from "next/router"
+import { useState, useEffect, useRef } from 'react'
+import styled from 'styled-components'
+import { Column, Container, Row } from 'components/common'
+import Friends from 'components/Friends'
+import Teams from 'components/Teams'
+import Home from 'components/ProfileHome'
+import History from 'components/History'
+import Link from 'next/link'
+import { AddMember } from 'components/TeamEdit'
+import { useRouter } from 'next/router'
 
 const ProfilePanel = styled(Row)``
 
@@ -123,7 +122,7 @@ export default function ProfileTop() {
   const router = useRouter()
   const { userId } = router.query
   const { user, avatar } = useUser(userId)
-  const [selected, setSelected] = useState("Home")
+  const [selected, setSelected] = useState('Home')
 
   return (
     <Column>
@@ -137,7 +136,7 @@ export default function ProfileTop() {
               <ProfileStats>
                 <GreyTextColumn>
                   <GreyText>rank</GreyText>
-                  <Numbers>{stats?.rank ?? "-"}</Numbers>
+                  <Numbers>{stats?.rank ?? '-'}</Numbers>
                 </GreyTextColumn>
                 <GreyTextColumn>
                   <GreyText>weekly wins</GreyText>
@@ -155,7 +154,7 @@ export default function ProfileTop() {
             currentUser.id !== userId &&
             isAuthenticated && (
               <ArrowColumn>
-                <div style={{ cursor: "pointer" }}>
+                <div style={{ cursor: 'pointer' }}>
                   <AddMember />
                   <div style={{ marginTop: 10 }}>invite friend</div>
                 </div>
@@ -164,43 +163,41 @@ export default function ProfileTop() {
         </SpaceBetween>
         <ButtonWrapper>
           <ButtonHome
-            style={{ borderBottom: `${selected === "Home" ? 1 : 0}px solid` }}
-            onClick={() => setSelected("Home")}
+            style={{ borderBottom: `${selected === 'Home' ? 1 : 0}px solid` }}
+            onClick={() => setSelected('Home')}
           >
             home
           </ButtonHome>
           <Button
             style={{
-              borderBottom: `${selected === "History" ? 1 : 0}px solid`
+              borderBottom: `${selected === 'History' ? 1 : 0}px solid`
             }}
-            onClick={() => setSelected("History")}
+            onClick={() => setSelected('History')}
           >
             event history
           </Button>
           <Button
-            style={{ borderBottom: `${selected === "Teams" ? 1 : 0}px solid` }}
-            onClick={() => setSelected("Teams")}
+            style={{ borderBottom: `${selected === 'Teams' ? 1 : 0}px solid` }}
+            onClick={() => setSelected('Teams')}
           >
             teams
           </Button>
           <Button
             style={{
-              borderBottom: `${selected === "Friends" ? 1 : 0}px solid`
+              borderBottom: `${selected === 'Friends' ? 1 : 0}px solid`
             }}
-            onClick={() => setSelected("Friends")}
+            onClick={() => setSelected('Friends')}
           >
             friends
           </Button>
-          <Link href="/events">
-            <a style={{ color: "inherit" }}>
-              <ButtonEvents>upcoming events</ButtonEvents>
-            </a>
+          <Link href="/events" passHref>
+            <ButtonEvents>upcoming events</ButtonEvents>
           </Link>
         </ButtonWrapper>
       </Wrapper>
-      {selected == "Teams" && <Teams />}
-      {selected == "Friends" && <Friends friends={null} />}
-      {selected == "Home" && <Home friends={null} />}
+      {selected === 'Teams' && <Teams />}
+      {selected === 'Friends' && <Friends friends={null} />}
+      {selected === 'Home' && <Home friends={null} />}
     </Column>
   )
 }

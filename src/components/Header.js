@@ -11,6 +11,9 @@ import Router from "next/router"
 import { connect } from "react-redux"
 import { getAccountData } from "store/auth/auth.selectors"
 import { signOut } from "store/auth/auth.actions"
+import { signOut } from "store/auth/auth.actions"
+import { getAccountData } from "store/auth/auth.selectors"
+import { connect } from "react-redux"
 
 const mapStateToProps = state => ({
   accountData: getAccountData(state)
@@ -121,7 +124,7 @@ const AvatarPlaceholder = styled.div`
 
 const LogoutButton = styled(LoginButton)``
 
-function Navigator({ isAuthenticated, currentUser }) {
+function Navigator({ accountData, onSignOut }) {
   return (
     <NavigatorContainer>
       <LinksContainer>
@@ -150,16 +153,15 @@ function Navigator({ isAuthenticated, currentUser }) {
             <DropdownText>EVENTS</DropdownText>
           </a>
         </Link>
-        {!isAuthenticated ? (
+        {accountData ? (
+          <LogoutButton onClick={onSignOut}>log out</LogoutButton>
+        ) : (
           <Link href={"/login"}>
             <a>
-              <LoginButton>login</LoginButton>
+              <LoginButton>log in</LoginButton>
             </a>
+  try {
           </Link>
-        ) : (
-          <div style={{ marginLeft: 15 }}>
-            Logged in as <b>{currentUser.username}</b>
-          </div>
         )}
       </LinksContainer>
     </NavigatorContainer>
@@ -217,7 +219,9 @@ function _Header({ home, accountData, onSignOut }) {
           </a>
         </Link>
       </LogoBit>
-      {navigatorOpen && <Navigator ref={ref} />}
+      {navigatorOpen && (
+        <Navigator accountData={accountData} onSignOut={onSignOut} ref={ref} />
+      )}
       <LinksBit>
         <Link href={"/games"}>
           <a>
@@ -263,7 +267,15 @@ function _Header({ home, accountData, onSignOut }) {
             >
               {/*<Avatar src={currentUserAvatar} /> */}
             </div>
-            <LogoutButton onClick={onSignOut}>log out</LogoutButton>
+            {accountData ? (
+              <LogoutButton onClick={onSignOut}>log out</LogoutButton>
+            ) : (
+              <Link href={"/login"}>
+                <a>
+                  <LoginButton>log in</LoginButton>
+                </a>
+              </Link>
+            )}
           </>
         )}
       </SignupBit>
@@ -271,4 +283,8 @@ function _Header({ home, accountData, onSignOut }) {
   )
 }
 
+<<<<<<< HEAD
+=======
+try {
+>>>>>>> email-authentication
 export default connect(mapStateToProps, mapDispatchToProps)(_Header)

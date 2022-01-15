@@ -1,16 +1,15 @@
-import styled from "styled-components"
-import { LoginButton } from "components/Buttons"
-import { Heading, Caption, Subtext, Entry, Input } from "components/Forms"
-import { GradientText } from "components/common"
-import Link from "next/link"
-import { useFormik } from "formik"
-import { Dots } from "react-activity"
-import { connect } from "react-redux"
-import { signIn } from "store/auth/auth.actions"
-import { getAccountData, getIsLoading } from "store/auth/auth.selectors"
-import router from "next/router"
-import { useRouter } from "next/router"
-import { useEffect } from "react"
+import styled from 'styled-components'
+import { LoginButton } from 'components/Buttons'
+import { Heading, Caption, Subtext, Entry, Input } from 'components/Forms'
+import { GradientText } from 'components/common'
+import Link from 'next/link'
+import { useFormik } from 'formik'
+import { Dots } from 'react-activity'
+import { connect } from 'react-redux'
+import { signIn } from 'store/auth/auth.actions'
+import { getAccountData, getIsLoading } from 'store/auth/auth.selectors'
+import router, { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 const mapStateToProps = state => ({
   isLoading: getIsLoading(state),
@@ -38,20 +37,19 @@ const SignupIfNotGotAnAccount = styled.div`
 `
 
 function Login({ isLoading, onSubmit, accountData }) {
+  const router = useRouter()
   const formik = useFormik({
     initialValues: {
-      username: "",
-      password: ""
+      username: '',
+      password: ''
     },
 
-    onSubmit: values => {
-      onSubmit
-    }
+    onSubmit: values => onSubmit(values)
   })
 
   useEffect(() => {
     if (accountData?.username && router) {
-      router.push("/profile")
+      router.push('/profile')
     }
   }, [router, accountData])
   return (
@@ -85,7 +83,7 @@ function Login({ isLoading, onSubmit, accountData }) {
           </SubmitEntry>
           <SignupIfNotGotAnAccount>
             Don&apos;t have an account?
-            <GradientText style={{ display: "inline", marginLeft: 5 }}>
+            <GradientText style={{ display: 'inline', marginLeft: 5 }}>
               <Link href="/signup">Sign up</Link>
             </GradientText>
           </SignupIfNotGotAnAccount>
