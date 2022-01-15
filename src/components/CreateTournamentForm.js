@@ -1,12 +1,6 @@
 import { Row, GradientText, Column } from 'components/common'
-import {
-  Heading,
-  Caption,
-  Subtext,
-  Entry,
-  Input,
-  SmallInput
-} from 'components/Forms'
+import { Heading, Caption, Subtext, Entry, Input } from 'components/Forms'
+import { useState } from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
 import { Dots } from 'react-activity'
@@ -19,14 +13,10 @@ import { CreateTournamentButton } from 'components/Buttons'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import Select from 'react-select'
+import Image from 'next/image'
 
 const mapStateToProps = state => ({
-  isLoading: getIsLoading(state),
-  tempCredentials: getTempCredentials(state)
-})
-
-const mapDispatchToProps = dispatch => ({
-  onSubmit: values => dispatch(signUp(values))
+  isLoading: getIsLoading(state)
 })
 
 const StyledDatePicker = styled(DatePicker)`
@@ -46,24 +36,8 @@ const StyledDatePicker = styled(DatePicker)`
   cursor: pointer;
 `
 
-const RowEntry = styled(Row)`
-  height: 130px;
-  width: 589px;
-  margin: auto;
-`
-
 const FormContainer = styled.div`
   margin: auto;
-`
-
-const ColumnEntry = styled(Column)``
-
-const Alert = styled.div`
-  line-height: 17px;
-  font-size: 12px;
-  font-weight: 400;
-  color: #ec9ba6;
-  margin-top: 10px;
 `
 
 const SubmitEntry = styled(Entry)`
@@ -78,7 +52,46 @@ const LoginIfGotAnAccount = styled.div`
 
 const Form = styled.form``
 
+const HorizontalScrollView = styled.div`
+  width: 589px;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+`
+
+const Tile = styled.div`
+  width: 106px;
+  height: 148px;
+  border-radius: 5px;
+  position: relative;
+`
+
+const SelectedGame = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(12, 10, 9, 0.4);
+  color: ${props => props.theme.colors.white};
+  user-select: none;
+`
+
+function SmallGameTile({ game, selected }) {
+  return (
+    <Tile>
+      {selected && <SelectedGame game={game} />}
+      <Image src={`/${game}.svg`} width={106} height={148} alt="game" />
+    </Tile>
+  )
+}
+
 export default function CreateTournament({ isLoading, onSubmit }) {
+  const [selectedGame, setSelectedGame] = useState(null)
+
   const formik = useFormik({
     initialValues: {
       name: 'tournament name',
@@ -91,13 +104,42 @@ export default function CreateTournament({ isLoading, onSubmit }) {
       platform: 'xbox'
     },
 
-    onSubmit: values => onSubmit(values)
+    onSubmit: values => {
+      const input = { ...values, game: selectedGame }
+      console.log('gfdg', input)
+      onSubmit(input)
+    }
   })
+
+  const regionOptions = [
+    { value: 'Europe', label: 'Europe' },
+    { value: 'USA', label: 'USA' },
+    { value: 'Asia', label: 'Asia' }
+  ]
+
+  const currencyOptions = [
+    { value: 'ETH', label: 'ETH' },
+    { value: 'BTC', label: 'BTC' },
+    { value: 'BNB', label: 'BNB' }
+  ]
 
   const platformOptions = [
     { value: 'pc', label: 'pc' },
     { value: 'xbox', label: 'xbox' },
     { value: 'playstation', label: 'playstation' }
+  ]
+
+  const games = [
+    { name: 'csgo' },
+    { name: 'dirt' },
+    { name: 'rl' },
+    { name: 'minecraft' },
+    { name: 'cod' },
+    { name: 'csgo' },
+    { name: 'dirt' },
+    { name: 'rl' },
+    { name: 'minecraft' },
+    { name: 'cod' }
   ]
 
   return (
@@ -117,94 +159,103 @@ export default function CreateTournament({ isLoading, onSubmit }) {
               value={formik.values.name}
             />
           </Entry>
-          <ColumnEntry>
-            <Entry>
-              <Caption>region</Caption>
-              <Input
-                id="region"
-                type="email"
-                name="region"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.region}
-              />
-            </Entry>
-            <Entry>
-              <Caption>description</Caption>
-              <Input
-                id="description"
-                type="text"
-                name="password"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.description}
-              />
-            </Entry>
-            <Entry>
-              <Caption>entry price</Caption>
-              <Input
-                id="entry"
-                type="text"
-                name="entry"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.entryPrice}
-              />
-            </Entry>
-            <Entry>
-              <Caption>prize</Caption>
-              <Input
-                id="prize"
-                type="text"
-                name="prize"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.prize}
-              />
-            </Entry>
-            <Entry>
-              <Caption>prize currency</Caption>
-              <Input
-                id="prizeCurrency"
-                type="text"
-                name="prizeCurrency"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.prizeCurrency}
-              />
-            </Entry>
-            <Entry>
-              <Caption>time</Caption>
-              <Input
-                id="time"
-                type="date"
-                name="platform"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                value={formik.values.time}
-              />
-            </Entry>
-            <Entry>
-              <Caption>platform</Caption>
-              <Select
-                id="platform"
-                name="platform"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                options={platformOptions}
-                value={formik.values.platform}
-              />
-            </Entry>
-            <SubmitEntry>
-              <CreateTournamentButton href="/ConfirmEmail" type="submit" />
-            </SubmitEntry>
-            <LoginIfGotAnAccount>
-              Already have an account?
-              <GradientText style={{ display: 'inline', marginLeft: 5 }}>
-                <Link href="/login">Log In</Link>
-              </GradientText>
-            </LoginIfGotAnAccount>
-          </ColumnEntry>
+          <Caption>game</Caption>
+          <HorizontalScrollView>
+            {games &&
+              games.map((game, key) => (
+                <div
+                  key={key}
+                  style={{ width: 105, height: 150, marginBottom: 20 }}
+                  onClick={() => setSelectedGame(game?.name)}
+                >
+                  <SmallGameTile
+                    game={game.name}
+                    caption={game.caption}
+                    selected={selectedGame === game?.name}
+                  />
+                </div>
+              ))}
+          </HorizontalScrollView>
+          <Entry>
+            <Caption>region</Caption>
+            <Select
+              id="region"
+              name="region"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              options={regionOptions}
+              value={formik.values.region}
+            />
+          </Entry>
+          <Entry>
+            <Caption>description</Caption>
+            <Input
+              id="description"
+              type="text"
+              name="description"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.description}
+            />
+          </Entry>
+          <Entry>
+            <Caption>entry price</Caption>
+            <Input
+              id="entry"
+              type="text"
+              name="entry"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.entryPrice}
+            />
+          </Entry>
+          <Entry>
+            <Caption>prize</Caption>
+            <Input
+              id="prize"
+              type="text"
+              name="prize"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.prize}
+            />
+          </Entry>
+          <Entry>
+            <Caption>prize currency</Caption>
+            <Select
+              id="prizeCurrency"
+              name="prizeCurrency"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              options={currencyOptions}
+              value={formik.values.prizeCurrency}
+            />
+          </Entry>
+          <Entry>
+            <Caption>time</Caption>
+            <Input
+              id="time"
+              type="date"
+              name="platform"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.time}
+            />
+          </Entry>
+          <Entry>
+            <Caption>platform</Caption>
+            <Select
+              id="platform"
+              name="platform"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              options={platformOptions}
+              value={formik.values.platform}
+            />
+          </Entry>
+          <SubmitEntry>
+            <CreateTournamentButton href="/ConfirmEmail" type="submit" />
+          </SubmitEntry>
         </Form>
       ) : (
         <Dots />
