@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-import { useContext, useEffect, useRef } from "react"
-=======
 import { useState } from "react"
->>>>>>> Stashed changes
 import styled from "styled-components"
 import { Column, Container, Row } from "components/common"
 import Friends from "components/Friends"
@@ -128,15 +124,6 @@ export default function ProfileTop() {
   const { userId } = router.query
   const { user, avatar } = useUser(userId)
   const [selected, setSelected] = useState("Home")
-<<<<<<< Updated upstream
-  const { currentUser, isAuthenticated, token } = useContext(
-    AuthenticationContext
-  )
-  const friends = useFriends(user)
-  const stats = useStats(user)
-  const inviteFriend = useInviteFriend()
-=======
->>>>>>> Stashed changes
 
   return (
     <Column>

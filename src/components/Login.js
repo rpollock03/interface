@@ -1,15 +1,15 @@
-import styled from 'styled-components'
-import { LoginButton } from 'components/Buttons'
-import { Heading, Caption, Subtext, Entry, Input } from 'components/Forms'
-import { GradientText } from 'components/common'
-import Link from 'next/link'
-import { useFormik } from 'formik'
-import { Dots } from 'react-activity'
-import { connect } from 'react-redux'
-import { signIn } from 'store/auth/auth.actions'
-import { getAccountData, getIsLoading } from 'store/auth/auth.selectors'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import styled from "styled-components"
+import { LoginButton } from "components/Buttons"
+import { Heading, Caption, Subtext, Entry, Input } from "components/Forms"
+import { GradientText } from "components/common"
+import Link from "next/link"
+import { useFormik } from "formik"
+import { Dots } from "react-activity"
+import { connect } from "react-redux"
+import { signIn } from "store/auth/auth.actions"
+import { getAccountData, getIsLoading } from "store/auth/auth.selectors"
+import { useRouter } from "next/router"
+import { useEffect } from "react"
 
 const mapStateToProps = state => ({
   isLoading: getIsLoading(state)
@@ -19,7 +19,7 @@ const mapDispatchToProps = dispatch => ({
   onSubmit: values => dispatch(signIn(values))
 })
 
-const FormContainer = styled.div`    console.log("signInSaga", e)
+const FormContainer = styled.div`
   margin: auto;
 `
 
@@ -38,21 +38,21 @@ const SignupIfNotGotAnAccount = styled.div`
 function Login({ isLoading, onSubmit }) {
   const formik = useFormik({
     initialValues: {
-      username: '',
-      password: ''
+      username: "",
+      password: ""
     },
 
-    onSubmit: values => onSubmit(values)
+    onSubmit: values => {
+      console.log(values)
+      console.log(formik.errors)
+    }
   })
 
-<<<<<<< Updated upstream
-=======
   useEffect(() => {
     if (accountData?.username && router) {
-      router.push('/profile')
+      router.push("/profile")
     }
   }, [router, accountData])
->>>>>>> Stashed changes
   return (
     <FormContainer>
       {!isLoading ? (
@@ -84,7 +84,7 @@ function Login({ isLoading, onSubmit }) {
           </SubmitEntry>
           <SignupIfNotGotAnAccount>
             Don&apos;t have an account?
-            <GradientText style={{ display: 'inline', marginLeft: 5 }}>
+            <GradientText style={{ display: "inline", marginLeft: 5 }}>
               <Link href="/signup">Sign up</Link>
             </GradientText>
           </SignupIfNotGotAnAccount>
