@@ -25,9 +25,9 @@ export const getTournament = /* GraphQL */ `
         tournaments {
           nextToken
         }
+        addedBy
         createdAt
         updatedAt
-        owner
       }
       time
       prize
@@ -60,9 +60,9 @@ export const listTournaments = /* GraphQL */ `
         game {
           id
           name
+          addedBy
           createdAt
           updatedAt
-          owner
         }
         time
         prize
@@ -103,13 +103,13 @@ export const getPlayer = /* GraphQL */ `
       points
       accounts {
         items {
+          id
+          playerId
           tag
           platform
-          id
           createdAt
           updatedAt
           playerAccountsId
-          owner
         }
         nextToken
       }
@@ -121,7 +121,7 @@ export const getPlayer = /* GraphQL */ `
           teamID
           createdAt
           updatedAt
-          owner
+          creator
         }
         nextToken
       }
@@ -139,14 +139,12 @@ export const getPlayer = /* GraphQL */ `
           createdAt
           updatedAt
           playerFriendsId
-          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       playerFriendsId
-      owner
     }
   }
 `;
@@ -182,9 +180,70 @@ export const listPlayers = /* GraphQL */ `
         createdAt
         updatedAt
         playerFriendsId
-        owner
       }
       nextToken
+    }
+  }
+`;
+export const searchPlayers = /* GraphQL */ `
+  query SearchPlayers(
+    $filter: SearchablePlayerFilterInput
+    $sort: [SearchablePlayerSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchablePlayerAggregationInput]
+  ) {
+    searchPlayers(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        userId
+        username
+        email
+        date_of_birth
+        password
+        is_active
+        tournaments {
+          nextToken
+        }
+        points
+        accounts {
+          nextToken
+        }
+        title
+        teams {
+          nextToken
+        }
+        friends {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        playerFriendsId
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -212,9 +271,9 @@ export const getGame = /* GraphQL */ `
         }
         nextToken
       }
+      addedBy
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -231,9 +290,9 @@ export const listGames = /* GraphQL */ `
         tournaments {
           nextToken
         }
+        addedBy
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -242,13 +301,13 @@ export const listGames = /* GraphQL */ `
 export const getGameAccount = /* GraphQL */ `
   query GetGameAccount($id: ID!) {
     getGameAccount(id: $id) {
+      id
+      playerId
       tag
       platform
-      id
       createdAt
       updatedAt
       playerAccountsId
-      owner
     }
   }
 `;
@@ -260,13 +319,13 @@ export const listGameAccounts = /* GraphQL */ `
   ) {
     listGameAccounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        id
+        playerId
         tag
         platform
-        id
         createdAt
         updatedAt
         playerAccountsId
-        owner
       }
       nextToken
     }
@@ -276,6 +335,7 @@ export const getTeam = /* GraphQL */ `
   query GetTeam($id: ID!) {
     getTeam(id: $id) {
       id
+      creator
       players {
         items {
           id
@@ -283,13 +343,12 @@ export const getTeam = /* GraphQL */ `
           teamID
           createdAt
           updatedAt
-          owner
+          creator
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -302,12 +361,12 @@ export const listTeams = /* GraphQL */ `
     listTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        creator
         players {
           nextToken
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -330,9 +389,9 @@ export const getTournamentPlayer = /* GraphQL */ `
         game {
           id
           name
+          addedBy
           createdAt
           updatedAt
-          owner
         }
         time
         prize
@@ -370,7 +429,6 @@ export const getTournamentPlayer = /* GraphQL */ `
         createdAt
         updatedAt
         playerFriendsId
-        owner
       }
       createdAt
       updatedAt
@@ -422,7 +480,6 @@ export const listTournamentPlayers = /* GraphQL */ `
           createdAt
           updatedAt
           playerFriendsId
-          owner
         }
         createdAt
         updatedAt
@@ -463,20 +520,19 @@ export const getTeamMember = /* GraphQL */ `
         createdAt
         updatedAt
         playerFriendsId
-        owner
       }
       team {
         id
+        creator
         players {
           nextToken
         }
         createdAt
         updatedAt
-        owner
       }
       createdAt
       updatedAt
-      owner
+      creator
     }
   }
 `;
@@ -504,17 +560,16 @@ export const listTeamMembers = /* GraphQL */ `
           createdAt
           updatedAt
           playerFriendsId
-          owner
         }
         team {
           id
+          creator
           createdAt
           updatedAt
-          owner
         }
         createdAt
         updatedAt
-        owner
+        creator
       }
       nextToken
     }

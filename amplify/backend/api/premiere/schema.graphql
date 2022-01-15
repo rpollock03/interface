@@ -5,8 +5,9 @@ type Tournament
   @model
   @auth(
     rules: [
-      { allow: owner, operations: [create, read] }
-      # TODO creator of tournament can update/delete tournament?
+      { allow: owner, operations: [create, read, update, delete] }
+      { allow: private, operations: [create, read] }
+      { allow: public, operations: [read] }
     ]
   ) {
   id: ID!
@@ -24,10 +25,18 @@ type Tournament
 
 type Player
   @model
+  @aws_iam
+  @aws_cognito_user_pools
+  @searchable
   @auth(
     rules: [
-      # TODO owner can edit their profile?
-      { allow: owner, operations: [read] }
+      {
+        allow: owner
+        operations: [create, read, update, delete]
+        ownerField: "id"
+      }
+      { allow: private, operations: [create, read] }
+      { allow: public, operations: [read] }
     ]
   ) {
   id: ID!
@@ -46,21 +55,59 @@ type Player
   friends: [Player] @hasMany
 }
 
-type Game @model @auth(rules: [{ allow: owner, operations: [create, read] }]) {
+type Game
+  @model
+  @auth(
+    rules: [
+      {
+        allow: owner
+        ownerField: "addedBy"
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [create, read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
   id: ID!
   name: String
   tournaments: [Tournament] @hasMany
+  addedBy: ID!
   # TODO picture: S3Object
 }
 
 type GameAccount
   @model
-  @auth(rules: [{ allow: owner, operations: [create, read] }]) {
+  @auth(
+    rules: [
+      {
+        allow: owner
+        ownerField: "playerId"
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [create, read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  playerId: ID!
   tag: String
   platform: String
 }
 
-type Team @model @auth(rules: [{ allow: owner, operations: [create, read] }]) {
+type Team
+  @model
+  @auth(
+    rules: [
+      {
+        allow: owner
+        ownerField: "creator"
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [create, read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
   id: ID!
+  creator: ID!
   players: [Player] @manyToMany(relationName: "TeamMember")
 }

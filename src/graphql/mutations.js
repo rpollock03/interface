@@ -28,9 +28,9 @@ export const createTournament = /* GraphQL */ `
         tournaments {
           nextToken
         }
+        addedBy
         createdAt
         updatedAt
-        owner
       }
       time
       prize
@@ -72,9 +72,9 @@ export const updateTournament = /* GraphQL */ `
         tournaments {
           nextToken
         }
+        addedBy
         createdAt
         updatedAt
-        owner
       }
       time
       prize
@@ -116,9 +116,9 @@ export const deleteTournament = /* GraphQL */ `
         tournaments {
           nextToken
         }
+        addedBy
         createdAt
         updatedAt
-        owner
       }
       time
       prize
@@ -160,13 +160,13 @@ export const createPlayer = /* GraphQL */ `
       points
       accounts {
         items {
+          id
+          playerId
           tag
           platform
-          id
           createdAt
           updatedAt
           playerAccountsId
-          owner
         }
         nextToken
       }
@@ -178,7 +178,7 @@ export const createPlayer = /* GraphQL */ `
           teamID
           createdAt
           updatedAt
-          owner
+          creator
         }
         nextToken
       }
@@ -196,14 +196,12 @@ export const createPlayer = /* GraphQL */ `
           createdAt
           updatedAt
           playerFriendsId
-          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       playerFriendsId
-      owner
     }
   }
 `;
@@ -234,13 +232,13 @@ export const updatePlayer = /* GraphQL */ `
       points
       accounts {
         items {
+          id
+          playerId
           tag
           platform
-          id
           createdAt
           updatedAt
           playerAccountsId
-          owner
         }
         nextToken
       }
@@ -252,7 +250,7 @@ export const updatePlayer = /* GraphQL */ `
           teamID
           createdAt
           updatedAt
-          owner
+          creator
         }
         nextToken
       }
@@ -270,14 +268,12 @@ export const updatePlayer = /* GraphQL */ `
           createdAt
           updatedAt
           playerFriendsId
-          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       playerFriendsId
-      owner
     }
   }
 `;
@@ -308,13 +304,13 @@ export const deletePlayer = /* GraphQL */ `
       points
       accounts {
         items {
+          id
+          playerId
           tag
           platform
-          id
           createdAt
           updatedAt
           playerAccountsId
-          owner
         }
         nextToken
       }
@@ -326,7 +322,7 @@ export const deletePlayer = /* GraphQL */ `
           teamID
           createdAt
           updatedAt
-          owner
+          creator
         }
         nextToken
       }
@@ -344,14 +340,12 @@ export const deletePlayer = /* GraphQL */ `
           createdAt
           updatedAt
           playerFriendsId
-          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       playerFriendsId
-      owner
     }
   }
 `;
@@ -382,9 +376,9 @@ export const createGame = /* GraphQL */ `
         }
         nextToken
       }
+      addedBy
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -415,9 +409,9 @@ export const updateGame = /* GraphQL */ `
         }
         nextToken
       }
+      addedBy
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -448,9 +442,9 @@ export const deleteGame = /* GraphQL */ `
         }
         nextToken
       }
+      addedBy
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -460,13 +454,13 @@ export const createGameAccount = /* GraphQL */ `
     $condition: ModelGameAccountConditionInput
   ) {
     createGameAccount(input: $input, condition: $condition) {
+      id
+      playerId
       tag
       platform
-      id
       createdAt
       updatedAt
       playerAccountsId
-      owner
     }
   }
 `;
@@ -476,13 +470,13 @@ export const updateGameAccount = /* GraphQL */ `
     $condition: ModelGameAccountConditionInput
   ) {
     updateGameAccount(input: $input, condition: $condition) {
+      id
+      playerId
       tag
       platform
-      id
       createdAt
       updatedAt
       playerAccountsId
-      owner
     }
   }
 `;
@@ -492,13 +486,13 @@ export const deleteGameAccount = /* GraphQL */ `
     $condition: ModelGameAccountConditionInput
   ) {
     deleteGameAccount(input: $input, condition: $condition) {
+      id
+      playerId
       tag
       platform
-      id
       createdAt
       updatedAt
       playerAccountsId
-      owner
     }
   }
 `;
@@ -509,6 +503,7 @@ export const createTeam = /* GraphQL */ `
   ) {
     createTeam(input: $input, condition: $condition) {
       id
+      creator
       players {
         items {
           id
@@ -516,13 +511,12 @@ export const createTeam = /* GraphQL */ `
           teamID
           createdAt
           updatedAt
-          owner
+          creator
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -533,6 +527,7 @@ export const updateTeam = /* GraphQL */ `
   ) {
     updateTeam(input: $input, condition: $condition) {
       id
+      creator
       players {
         items {
           id
@@ -540,13 +535,12 @@ export const updateTeam = /* GraphQL */ `
           teamID
           createdAt
           updatedAt
-          owner
+          creator
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -557,6 +551,7 @@ export const deleteTeam = /* GraphQL */ `
   ) {
     deleteTeam(input: $input, condition: $condition) {
       id
+      creator
       players {
         items {
           id
@@ -564,13 +559,12 @@ export const deleteTeam = /* GraphQL */ `
           teamID
           createdAt
           updatedAt
-          owner
+          creator
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -594,9 +588,9 @@ export const createTournamentPlayer = /* GraphQL */ `
         game {
           id
           name
+          addedBy
           createdAt
           updatedAt
-          owner
         }
         time
         prize
@@ -634,7 +628,6 @@ export const createTournamentPlayer = /* GraphQL */ `
         createdAt
         updatedAt
         playerFriendsId
-        owner
       }
       createdAt
       updatedAt
@@ -662,9 +655,9 @@ export const updateTournamentPlayer = /* GraphQL */ `
         game {
           id
           name
+          addedBy
           createdAt
           updatedAt
-          owner
         }
         time
         prize
@@ -702,7 +695,6 @@ export const updateTournamentPlayer = /* GraphQL */ `
         createdAt
         updatedAt
         playerFriendsId
-        owner
       }
       createdAt
       updatedAt
@@ -730,9 +722,9 @@ export const deleteTournamentPlayer = /* GraphQL */ `
         game {
           id
           name
+          addedBy
           createdAt
           updatedAt
-          owner
         }
         time
         prize
@@ -770,7 +762,6 @@ export const deleteTournamentPlayer = /* GraphQL */ `
         createdAt
         updatedAt
         playerFriendsId
-        owner
       }
       createdAt
       updatedAt
@@ -812,20 +803,19 @@ export const createTeamMember = /* GraphQL */ `
         createdAt
         updatedAt
         playerFriendsId
-        owner
       }
       team {
         id
+        creator
         players {
           nextToken
         }
         createdAt
         updatedAt
-        owner
       }
       createdAt
       updatedAt
-      owner
+      creator
     }
   }
 `;
@@ -863,20 +853,19 @@ export const updateTeamMember = /* GraphQL */ `
         createdAt
         updatedAt
         playerFriendsId
-        owner
       }
       team {
         id
+        creator
         players {
           nextToken
         }
         createdAt
         updatedAt
-        owner
       }
       createdAt
       updatedAt
-      owner
+      creator
     }
   }
 `;
@@ -914,20 +903,19 @@ export const deleteTeamMember = /* GraphQL */ `
         createdAt
         updatedAt
         playerFriendsId
-        owner
       }
       team {
         id
+        creator
         players {
           nextToken
         }
         createdAt
         updatedAt
-        owner
       }
       createdAt
       updatedAt
-      owner
+      creator
     }
   }
 `;

@@ -25,9 +25,9 @@ export const onCreateTournament = /* GraphQL */ `
         tournaments {
           nextToken
         }
+        addedBy
         createdAt
         updatedAt
-        owner
       }
       time
       prize
@@ -66,9 +66,9 @@ export const onUpdateTournament = /* GraphQL */ `
         tournaments {
           nextToken
         }
+        addedBy
         createdAt
         updatedAt
-        owner
       }
       time
       prize
@@ -107,9 +107,9 @@ export const onDeleteTournament = /* GraphQL */ `
         tournaments {
           nextToken
         }
+        addedBy
         createdAt
         updatedAt
-        owner
       }
       time
       prize
@@ -125,8 +125,8 @@ export const onDeleteTournament = /* GraphQL */ `
   }
 `;
 export const onCreatePlayer = /* GraphQL */ `
-  subscription OnCreatePlayer($owner: String) {
-    onCreatePlayer(owner: $owner) {
+  subscription OnCreatePlayer($id: String) {
+    onCreatePlayer(id: $id) {
       id
       userId
       username
@@ -148,13 +148,13 @@ export const onCreatePlayer = /* GraphQL */ `
       points
       accounts {
         items {
+          id
+          playerId
           tag
           platform
-          id
           createdAt
           updatedAt
           playerAccountsId
-          owner
         }
         nextToken
       }
@@ -166,7 +166,7 @@ export const onCreatePlayer = /* GraphQL */ `
           teamID
           createdAt
           updatedAt
-          owner
+          creator
         }
         nextToken
       }
@@ -184,20 +184,18 @@ export const onCreatePlayer = /* GraphQL */ `
           createdAt
           updatedAt
           playerFriendsId
-          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       playerFriendsId
-      owner
     }
   }
 `;
 export const onUpdatePlayer = /* GraphQL */ `
-  subscription OnUpdatePlayer($owner: String) {
-    onUpdatePlayer(owner: $owner) {
+  subscription OnUpdatePlayer($id: String) {
+    onUpdatePlayer(id: $id) {
       id
       userId
       username
@@ -219,13 +217,13 @@ export const onUpdatePlayer = /* GraphQL */ `
       points
       accounts {
         items {
+          id
+          playerId
           tag
           platform
-          id
           createdAt
           updatedAt
           playerAccountsId
-          owner
         }
         nextToken
       }
@@ -237,7 +235,7 @@ export const onUpdatePlayer = /* GraphQL */ `
           teamID
           createdAt
           updatedAt
-          owner
+          creator
         }
         nextToken
       }
@@ -255,20 +253,18 @@ export const onUpdatePlayer = /* GraphQL */ `
           createdAt
           updatedAt
           playerFriendsId
-          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       playerFriendsId
-      owner
     }
   }
 `;
 export const onDeletePlayer = /* GraphQL */ `
-  subscription OnDeletePlayer($owner: String) {
-    onDeletePlayer(owner: $owner) {
+  subscription OnDeletePlayer($id: String) {
+    onDeletePlayer(id: $id) {
       id
       userId
       username
@@ -290,13 +286,13 @@ export const onDeletePlayer = /* GraphQL */ `
       points
       accounts {
         items {
+          id
+          playerId
           tag
           platform
-          id
           createdAt
           updatedAt
           playerAccountsId
-          owner
         }
         nextToken
       }
@@ -308,7 +304,7 @@ export const onDeletePlayer = /* GraphQL */ `
           teamID
           createdAt
           updatedAt
-          owner
+          creator
         }
         nextToken
       }
@@ -326,20 +322,18 @@ export const onDeletePlayer = /* GraphQL */ `
           createdAt
           updatedAt
           playerFriendsId
-          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       playerFriendsId
-      owner
     }
   }
 `;
 export const onCreateGame = /* GraphQL */ `
-  subscription OnCreateGame($owner: String) {
-    onCreateGame(owner: $owner) {
+  subscription OnCreateGame($addedBy: String) {
+    onCreateGame(addedBy: $addedBy) {
       id
       name
       tournaments {
@@ -361,15 +355,15 @@ export const onCreateGame = /* GraphQL */ `
         }
         nextToken
       }
+      addedBy
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onUpdateGame = /* GraphQL */ `
-  subscription OnUpdateGame($owner: String) {
-    onUpdateGame(owner: $owner) {
+  subscription OnUpdateGame($addedBy: String) {
+    onUpdateGame(addedBy: $addedBy) {
       id
       name
       tournaments {
@@ -391,15 +385,15 @@ export const onUpdateGame = /* GraphQL */ `
         }
         nextToken
       }
+      addedBy
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onDeleteGame = /* GraphQL */ `
-  subscription OnDeleteGame($owner: String) {
-    onDeleteGame(owner: $owner) {
+  subscription OnDeleteGame($addedBy: String) {
+    onDeleteGame(addedBy: $addedBy) {
       id
       name
       tournaments {
@@ -421,55 +415,56 @@ export const onDeleteGame = /* GraphQL */ `
         }
         nextToken
       }
+      addedBy
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onCreateGameAccount = /* GraphQL */ `
-  subscription OnCreateGameAccount($owner: String) {
-    onCreateGameAccount(owner: $owner) {
+  subscription OnCreateGameAccount($playerId: String) {
+    onCreateGameAccount(playerId: $playerId) {
+      id
+      playerId
       tag
       platform
-      id
       createdAt
       updatedAt
       playerAccountsId
-      owner
     }
   }
 `;
 export const onUpdateGameAccount = /* GraphQL */ `
-  subscription OnUpdateGameAccount($owner: String) {
-    onUpdateGameAccount(owner: $owner) {
+  subscription OnUpdateGameAccount($playerId: String) {
+    onUpdateGameAccount(playerId: $playerId) {
+      id
+      playerId
       tag
       platform
-      id
       createdAt
       updatedAt
       playerAccountsId
-      owner
     }
   }
 `;
 export const onDeleteGameAccount = /* GraphQL */ `
-  subscription OnDeleteGameAccount($owner: String) {
-    onDeleteGameAccount(owner: $owner) {
+  subscription OnDeleteGameAccount($playerId: String) {
+    onDeleteGameAccount(playerId: $playerId) {
+      id
+      playerId
       tag
       platform
-      id
       createdAt
       updatedAt
       playerAccountsId
-      owner
     }
   }
 `;
 export const onCreateTeam = /* GraphQL */ `
-  subscription OnCreateTeam($owner: String) {
-    onCreateTeam(owner: $owner) {
+  subscription OnCreateTeam($creator: String) {
+    onCreateTeam(creator: $creator) {
       id
+      creator
       players {
         items {
           id
@@ -477,20 +472,20 @@ export const onCreateTeam = /* GraphQL */ `
           teamID
           createdAt
           updatedAt
-          owner
+          creator
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onUpdateTeam = /* GraphQL */ `
-  subscription OnUpdateTeam($owner: String) {
-    onUpdateTeam(owner: $owner) {
+  subscription OnUpdateTeam($creator: String) {
+    onUpdateTeam(creator: $creator) {
       id
+      creator
       players {
         items {
           id
@@ -498,20 +493,20 @@ export const onUpdateTeam = /* GraphQL */ `
           teamID
           createdAt
           updatedAt
-          owner
+          creator
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onDeleteTeam = /* GraphQL */ `
-  subscription OnDeleteTeam($owner: String) {
-    onDeleteTeam(owner: $owner) {
+  subscription OnDeleteTeam($creator: String) {
+    onDeleteTeam(creator: $creator) {
       id
+      creator
       players {
         items {
           id
@@ -519,19 +514,18 @@ export const onDeleteTeam = /* GraphQL */ `
           teamID
           createdAt
           updatedAt
-          owner
+          creator
         }
         nextToken
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onCreateTournamentPlayer = /* GraphQL */ `
-  subscription OnCreateTournamentPlayer($owner: String) {
-    onCreateTournamentPlayer(owner: $owner) {
+  subscription OnCreateTournamentPlayer($owner: String, $id: String) {
+    onCreateTournamentPlayer(owner: $owner, id: $id) {
       id
       tournamentID
       playerID
@@ -546,9 +540,9 @@ export const onCreateTournamentPlayer = /* GraphQL */ `
         game {
           id
           name
+          addedBy
           createdAt
           updatedAt
-          owner
         }
         time
         prize
@@ -586,7 +580,6 @@ export const onCreateTournamentPlayer = /* GraphQL */ `
         createdAt
         updatedAt
         playerFriendsId
-        owner
       }
       createdAt
       updatedAt
@@ -595,8 +588,8 @@ export const onCreateTournamentPlayer = /* GraphQL */ `
   }
 `;
 export const onUpdateTournamentPlayer = /* GraphQL */ `
-  subscription OnUpdateTournamentPlayer($owner: String) {
-    onUpdateTournamentPlayer(owner: $owner) {
+  subscription OnUpdateTournamentPlayer($owner: String, $id: String) {
+    onUpdateTournamentPlayer(owner: $owner, id: $id) {
       id
       tournamentID
       playerID
@@ -611,9 +604,9 @@ export const onUpdateTournamentPlayer = /* GraphQL */ `
         game {
           id
           name
+          addedBy
           createdAt
           updatedAt
-          owner
         }
         time
         prize
@@ -651,7 +644,6 @@ export const onUpdateTournamentPlayer = /* GraphQL */ `
         createdAt
         updatedAt
         playerFriendsId
-        owner
       }
       createdAt
       updatedAt
@@ -660,8 +652,8 @@ export const onUpdateTournamentPlayer = /* GraphQL */ `
   }
 `;
 export const onDeleteTournamentPlayer = /* GraphQL */ `
-  subscription OnDeleteTournamentPlayer($owner: String) {
-    onDeleteTournamentPlayer(owner: $owner) {
+  subscription OnDeleteTournamentPlayer($owner: String, $id: String) {
+    onDeleteTournamentPlayer(owner: $owner, id: $id) {
       id
       tournamentID
       playerID
@@ -676,9 +668,9 @@ export const onDeleteTournamentPlayer = /* GraphQL */ `
         game {
           id
           name
+          addedBy
           createdAt
           updatedAt
-          owner
         }
         time
         prize
@@ -716,7 +708,6 @@ export const onDeleteTournamentPlayer = /* GraphQL */ `
         createdAt
         updatedAt
         playerFriendsId
-        owner
       }
       createdAt
       updatedAt
@@ -725,8 +716,8 @@ export const onDeleteTournamentPlayer = /* GraphQL */ `
   }
 `;
 export const onCreateTeamMember = /* GraphQL */ `
-  subscription OnCreateTeamMember($owner: String) {
-    onCreateTeamMember(owner: $owner) {
+  subscription OnCreateTeamMember($id: String, $creator: String) {
+    onCreateTeamMember(id: $id, creator: $creator) {
       id
       playerID
       teamID
@@ -755,26 +746,25 @@ export const onCreateTeamMember = /* GraphQL */ `
         createdAt
         updatedAt
         playerFriendsId
-        owner
       }
       team {
         id
+        creator
         players {
           nextToken
         }
         createdAt
         updatedAt
-        owner
       }
       createdAt
       updatedAt
-      owner
+      creator
     }
   }
 `;
 export const onUpdateTeamMember = /* GraphQL */ `
-  subscription OnUpdateTeamMember($owner: String) {
-    onUpdateTeamMember(owner: $owner) {
+  subscription OnUpdateTeamMember($id: String, $creator: String) {
+    onUpdateTeamMember(id: $id, creator: $creator) {
       id
       playerID
       teamID
@@ -803,26 +793,25 @@ export const onUpdateTeamMember = /* GraphQL */ `
         createdAt
         updatedAt
         playerFriendsId
-        owner
       }
       team {
         id
+        creator
         players {
           nextToken
         }
         createdAt
         updatedAt
-        owner
       }
       createdAt
       updatedAt
-      owner
+      creator
     }
   }
 `;
 export const onDeleteTeamMember = /* GraphQL */ `
-  subscription OnDeleteTeamMember($owner: String) {
-    onDeleteTeamMember(owner: $owner) {
+  subscription OnDeleteTeamMember($id: String, $creator: String) {
+    onDeleteTeamMember(id: $id, creator: $creator) {
       id
       playerID
       teamID
@@ -851,20 +840,19 @@ export const onDeleteTeamMember = /* GraphQL */ `
         createdAt
         updatedAt
         playerFriendsId
-        owner
       }
       team {
         id
+        creator
         players {
           nextToken
         }
         createdAt
         updatedAt
-        owner
       }
       createdAt
       updatedAt
-      owner
+      creator
     }
   }
 `;
