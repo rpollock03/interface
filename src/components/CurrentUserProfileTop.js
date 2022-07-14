@@ -16,10 +16,14 @@ const SpaceBetween = styled(Row)`
 `
 
 const Name = styled.div`
-  font-size: 36px;
-  line-height: 36px;
+  font-size: 20px;
+  line-height: 20px;
   font-style: italic;
   font-weight: 700;
+  @media screen and (min-width: 650px) {
+    font-size: 36px;
+    line-height: 36px;
+  }
 `
 
 const Wrapper = styled(Container)`
@@ -38,7 +42,10 @@ const Team = styled.div`
 `
 
 const ProfileInfo = styled(Column)`
-  margin-left: 52px;
+  margin-left: 12px;
+  @media screen and (min-width: 650px) {
+    margin-left: 52px;
+  }
 `
 
 const ProfileStats = styled(Row)``
@@ -50,10 +57,15 @@ const GreyTextColumn = styled(Column)`
 const GreyText = styled.div`
   font-style: Regular;
   font-size: 16px;
-  fine-height: 24px;
+  line-height: 24px;
+  margin-top: 10px;
   color: ${(props) => props.theme.colors.gray};
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  @media screen and (max-width: 650px) {
+    font-size: 12px;
+    line-height: 20px;
+  }
 `
 
 const ArrowColumn = styled(Column)`
@@ -72,7 +84,9 @@ const Numbers = styled.div`
 const ButtonWrapper = styled(Row)`
   justify-content: space-between;
   margin-top: 79px;
-  width: 800px;
+  @media screen and (min-width: 900px) {
+    width: 800px;
+  }
 `
 
 const Button = styled.div`
@@ -93,22 +107,22 @@ const Button = styled.div`
   &:hover {
     cursor: pointer;
   }
+  @media screen and (max-width: 900px) {
+   font-size:10px;
+   height: 30px;
+   line-height:20px;
+   padding: 10px;
+   margin: 5px;
+   margin-bottom: 10px;
+   text-align: center;
+  }
 `
-
-const ButtonHome = styled(Button)`
-  padding-left: 0px;
-  padding-right: 23px;
-`
-
-const ButtonEvents = styled(Button)`
-  padding-left: 23px;
-  padding-right: 0px;
-`
-
 const Avatar = styled.img`
   width: 200px;
-  height: 200px;
   border-radius: 200px;
+  @media screen and (max-width: 850px) {
+    width: 90px;
+  }
 `
 
 export default function ProfileTop() {
@@ -144,12 +158,12 @@ export default function ProfileTop() {
           </ProfilePanel>
         </SpaceBetween>
         <ButtonWrapper>
-          <ButtonHome
+          <Button
             style={{ borderBottom: `${selected == 'Home' ? 1 : 0}px solid` }}
             onClick={() => setSelected('Home')}
           >
             home
-          </ButtonHome>
+          </Button>
           <Button
             style={{ borderBottom: `${selected == 'History' ? 1 : 0}px solid` }}
             onClick={() => setSelected('History')}
@@ -164,7 +178,7 @@ export default function ProfileTop() {
           </Button>
           <Link href={'/events'}>
             <a style={{ color: 'inherit' }}>
-              <ButtonEvents>upcoming events</ButtonEvents>
+              <Button>upcoming events</Button>
             </a>
           </Link>
         </ButtonWrapper>

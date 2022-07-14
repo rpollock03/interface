@@ -39,7 +39,7 @@ const Numbers = styled.div`
 
 const GreyTextColumn = styled(Column)`
   @media screen and (max-width: 800px) {
-    margin-right: 50px;
+    margin-right: 20px;
   }
 `
 
