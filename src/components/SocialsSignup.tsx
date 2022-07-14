@@ -11,11 +11,13 @@ import Spinner from 'react-activity/dist/Spinner'
 import AuthenticationContext from 'contexts/authentication'
 
 const SocialsSignupContainer = styled.div`
+  max-width: 600px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   flex-direction: row;
   height: 120px;
+  margin: auto;
 `
 
 const ButtonContainer = styled.div`
@@ -27,6 +29,7 @@ const ButtonContainer = styled.div`
   background-color: #fff;
   border-radius: 10%;
   cursor: pointer;
+  margin: 10px;
 `
 
 export default function SocialsSignup() {

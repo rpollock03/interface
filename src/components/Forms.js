@@ -5,10 +5,10 @@ export const Entry = styled.div`
   height: 130px;
   margin: auto;
 `
-
 export const Input = styled.input`
-  width: 589px;
   height: 60px;
+  min-width: 350px;
+  max-width: 450px;
   background: #ffffff;
   border: 1px solid #eaeaea;
   box-sizing: border-box;

@@ -8,7 +8,13 @@ import { Dots } from 'react-activity'
 import SocialsSignup from 'components/SocialsSignup'
 
 const FormContainer = styled.form`
-  margin: auto;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+`
+
+const LoginPageButton = styled(LoginButton)`
+width: 350px;
 `
 
 const SubmitEntry = styled(Entry)`
@@ -62,9 +68,9 @@ export default function Login() {
       </Entry>
       <SubmitEntry>
         {loading ? (
-          <LoginButton text={<Dots />} disabled />
+          <LoginPageButton text={<Dots />} disabled />
         ) : (
-          <LoginButton type={'submit'} text={'log in'} disabled={false} />
+          <LoginPageButton type={'submit'} text={'log in'} disabled={false} />
         )}
       </SubmitEntry>
       <SocialsSignup />
